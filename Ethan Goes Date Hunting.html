@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meet Ethan 💌</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose: #c0395a;
+    --rose-light: #f7e0e6;
+    --rose-mid: #e8849a;
+    --cream: #fdf6f0;
+    --blush: #fce8ee;
+    --gold: #c9954c;
+    --dark: #2a1a1f;
+    --mid: #6b3d4a;
+    --soft: #b07a8a;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--cream);
+    color: var(--dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .hearts-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .heart-float {
+    position: absolute;
+    font-size: 1.2rem;
+    opacity: 0.12;
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(110vh) rotate(-10deg); opacity: 0; }
+    10% { opacity: 0.12; }
+    90% { opacity: 0.08; }
+    100% { transform: translateY(-10vh) rotate(10deg); opacity: 0; }
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .ribbon {
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: fadeDown 0.8s ease both;
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .ribbon-tag {
+    display: inline-block;
+    background: var(--rose);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 1.2rem;
+    border-radius: 2rem;
+    margin-bottom: 1rem;
+  }
+  .ribbon h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 8vw, 3.4rem);
+    font-weight: 700;
+    color: var(--rose);
+    line-height: 1.1;
+  }
+  .ribbon h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .ribbon .subtitle {
+    font-size: 0.95rem;
+    color: var(--soft);
+    margin-top: 0.5rem;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  .photo-card {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(192, 57, 90, 0.12), 0 2px 8px rgba(0,0,0,0.06);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.9s ease 0.2s both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .photo-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--blush) 0%, var(--rose-light) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .photo-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 70%, rgba(192,57,90,0.08) 0%, transparent 60%);
+  }
+  .photo-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+  .photo-label {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--rose);
+    font-size: 1rem;
+    opacity: 0.7;
+  }
+  .photo-hint {
+    font-size: 0.75rem;
+    color: var(--soft);
+    margin-top: 0.3rem;
+    opacity: 0.8;
+  }
+
+  .name-badge {
+    background: white;
+    padding: 1.25rem 1.5rem;
+    border-top: 2px solid var(--rose-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .name-badge .name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--dark);
+  }
+  .name-badge .age {
+    font-size: 1rem;
+    color: var(--soft);
+    font-weight: 300;
+  }
+  .verified {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    color: var(--rose);
+    font-weight: 500;
+    background: var(--blush);
+    padding: 0.35rem 0.75rem;
+    border-radius: 2rem;
+  }
+  .verified::before { content: '♥'; }
+
+  .section {
+    animation: fadeUp 0.9s ease both;
+  }
+  .section:nth-child(3) { animation-delay: 0.3s; }
+  .section:nth-child(4) { animation-delay: 0.4s; }
+  .section:nth-child(5) { animation-delay: 0.5s; }
+  .section:nth-child(6) { animation-delay: 0.6s; }
+
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 2px 16px rgba(192, 57, 90, 0.07);
+    border: 1px solid rgba(192, 57, 90, 0.06);
+  }
+  .card-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .card-label::before {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 2px;
+    background: var(--rose-mid);
+    border-radius: 1px;
+  }
+
+  .about-text {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--mid);
+    font-weight: 300;
+  }
+  .about-text strong { color: var(--dark); font-weight: 500; }
+
+  .facts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+  .fact-chip {
+    background: var(--blush);
+    border-radius: 14px;
+    padding: 0.85rem 0.5rem;
+    text-align: center;
+  }
+  .fact-chip .fact-icon { font-size: 1.3rem; margin-bottom: 0.3rem; }
+  .fact-chip .fact-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--dark);
+    display: block;
+  }
+  .fact-chip .fact-key {
+    font-size: 0.65rem;
+    color: var(--soft);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .tag {
+    background: var(--rose-light);
+    color: var(--rose);
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.45rem 0.9rem;
+    border-radius: 2rem;
+    border: 1px solid rgba(192, 57, 90, 0.15);
+  }
+
+  .contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.75rem 1rem;
+    background: var(--cream);
+    border-radius: 14px;
+    border: 1px solid rgba(192, 57, 90, 0.08);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s, transform 0.15s;
+    cursor: pointer;
+  }
+  .contact-row:hover {
+    background: var(--blush);
+    transform: translateX(3px);
+  }
+  .contact-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: var(--rose);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .contact-meta { flex: 1; }
+  .contact-type {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--soft);
+    font-weight: 500;
+  }
+  .contact-value {
+    font-size: 0.95rem;
+    color: var(--dark);
+    font-weight: 400;
+  }
+  .contact-arrow { color: var(--rose-mid); font-size: 0.9rem; }
+
+  .cta-card {
+    background: var(--rose);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    margin-bottom: 1.25rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-card::before {
+    content: '♥';
+    position: absolute;
+    font-size: 10rem;
+    opacity: 0.06;
+    top: -2rem;
+    right: -1rem;
+    line-height: 1;
+  }
+  .cta-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .cta-card p {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: white;
+    color: var(--rose);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.75rem 2rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: transform 0.15s, box-shadow 0.15s;
+    border: none;
+    cursor: pointer;
+  }
+  .cta-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+
+  .footer {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--soft);
+    margin-top: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+  }
+  .footer span { color: var(--rose); }
+
+</style>
+</head>
+<body>
+
+<div class="hearts-bg" id="heartsContainer"></div>
+
+<div class="page">
+
+  <div class="ribbon">
+    <div class="ribbon-tag">💌 Dating Profile</div>
+    <h1>Meet <em>Ethan</em></h1>
+    <p class="subtitle">Looking for something real — maybe that's you?</p>
+  </div>
+
+  <div class="photo-card section">
+    <img src="Ethan1.png" alt="Ethan" style="width:100%; display:block; aspect-ratio:4/3; object-fit:cover;">
+    <div class="name-badge">
+      <div>
+        <div class="name">Ethan</div>
+        <div class="age">18 Years Old</div>
+      </div>
+      <div class="verified">Good Boy</div>
+    </div>
+  </div>
+
+  <div class="card section">
+    <div class="card-label">At a glance</div>
+    <div class="facts-grid">
+      <div class="fact-chip">
+        <div class="fact-icon">📍</div>
+        <span class="fact-value">Mumbai</span>
+        <span class="fact-key">Lives in</span>
+      </div>
+      <div class="fact-chip">
+        <div class="fact-icon">🎓</div>
+        <span class="fact-value">Coding</span>
+        <span class="fact-key">Does</span>
+      </div>
+      <div class="fact-chip">
+        <div class="fact-icon">📏</div>
+        <span class="fact-value">5'8"</span>
+        <span class="fact-key">Height</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card section">
+    <div class="card-label">About him</div>
+    <p class="about-text">
+      Hey! I'm <strong>Ethan</strong> i dont know what is batata good at
+  </div>
+
+  <div class="card section">
+    <div class="card-label">Into</div>
+    <div class="tags">
+      <span class="tag">🎮 Gaming</span>
+      <span class="tag">🎬 Binge Watching Movies</span>
+      <span class="tag">🎤 Singing While Listening To Music</span>
+    </div>
+  </div>
+
+  <div class="card section">
+    <div class="card-label">Slide into his inbox</div>
+    <div class="contact-list">
+
+      <a class="contact-row" href="https://www.instagram.com/iitss_ethanferns/?hl=en" target="_blank">
+        <div class="contact-icon">📸</div>
+        <div class="contact-meta">
+          <div class="contact-type">Instagram</div>
+          <div class="contact-value">@iitss_ethanferns</div>
+        </div>
+        <span class="contact-arrow">→</span>
+      </a>
+
+      
+      <a class="contact-row" href="https://wa.me/911111111111" target="_blank">
+        <div class="contact-icon">💬</div>
+        <div class="contact-meta">
+          <div class="contact-type">WhatsApp</div>
+          <div class="contact-value">+91 99XX69XXX7</div>
+        </div>
+        <span class="contact-arrow">→</span>
+      </a>
+
+      
+      <a class="contact-row" href="mailto:ethan@email.com">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-meta">
+          <div class="contact-type">Email</div>
+          <div class="contact-value">ethan@gmail.com</div>
+        </div>
+        <span class="contact-arrow">→</span>
+      </a>
+
+      
+      <a class="contact-row" href="#">
+        <div class="contact-icon">👻</div>
+        <div class="contact-meta">
+          <div class="contact-type">Snapchat</div>
+          <div class="contact-value">ethan_snap</div>
+        </div>
+        <span class="contact-arrow">→</span>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="cta-card section">
+    <h2>Think you two could click?</h2>
+    <p>Life's too short to wonder "what if." Send him a message — worst case, you made a new friend.</p>
+    <a class="cta-btn" href="https://wa.me/911111111111" target="_blank">Say hello 💌</a>
+  </div>
+
+  <p class="footer">Made with <span>♥</span> by Ethan's squad &nbsp;·&nbsp; Swipe wisely</p>
+
+</div>
+
+<script>
+  const container = document.getElementById('heartsContainer');
+  const symbols = ['♥', '♡', '❤', '♥', '♡'];
+  for (let i = 0; i < 18; i++) {
+    const h = document.createElement('span');
+    h.className = 'heart-float';
+    h.textContent = symbols[i % symbols.length];
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.fontSize = (0.8 + Math.random() * 1.4) + 'rem';
+    h.style.animationDuration = (12 + Math.random() * 18) + 's';
+    h.style.animationDelay = (Math.random() * 15) + 's';
+    container.appendChild(h);
+  }
+</script>
+
+</body>
+</html>
